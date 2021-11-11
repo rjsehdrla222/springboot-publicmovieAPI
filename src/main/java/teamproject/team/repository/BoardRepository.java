@@ -21,4 +21,12 @@ public interface BoardRepository {
     List<Board> getFirstRank3();
     void boardInsert3(Board board);
     void deleteContent3();
+
+    List<Board> totalList();
+    void totalInsert(Board board);
+
+    List<Board> totalDetail(String title);
+
+
+
 }

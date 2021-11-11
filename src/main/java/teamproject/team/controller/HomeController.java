@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import teamproject.team.domain.Board;
 import teamproject.team.service.ApiService;
 import teamproject.team.service.BoardService;
 
@@ -43,5 +45,20 @@ public class HomeController {
         model.addAttribute("list", list);
         model.addAttribute("firstRank", firstRank);
         return "index";
+    }
+
+    @GetMapping("/review")
+    public String review(Model model) {
+        List list = boardService.totalList();
+        model.addAttribute("list", list);
+        return "reviewHome";
+
+    }
+
+    @GetMapping("/review/{title}")
+    public String review(@PathVariable String title, Model model) {
+        List list = boardService.totalDetail(title);
+        model.addAttribute("list", list);
+        return "review";
     }
 }

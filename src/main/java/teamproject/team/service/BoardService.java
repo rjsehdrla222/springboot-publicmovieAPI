@@ -49,4 +49,11 @@ public class BoardService {
     public void boardDelete3() {
         repository.deleteContent3();
     }
+
+    public void totalInsert(Board board) {repository.totalInsert(board);}
+    public List<Board> totalList() { return repository.totalList(); }
+
+    public List<Board> totalDetail(String title) {
+        return repository.totalDetail(title);
+    }
 }

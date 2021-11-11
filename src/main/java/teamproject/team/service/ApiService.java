@@ -103,6 +103,7 @@ public class ApiService {
         board.setRanks(ranks);
         board.setTitle(title);
         boardService.boardInsert(board);
+        boardService.totalInsert(board);
     }
 
     public void insertData2(long id, String title, int ranks) {
@@ -110,6 +111,7 @@ public class ApiService {
         board.setId(id);
         board.setRanks(ranks);
         board.setTitle(title);
+        boardService.totalInsert(board);
         boardService.boardInsert2(board);
     }
 
@@ -118,6 +120,7 @@ public class ApiService {
         board.setId(id);
         board.setRanks(ranks);
         board.setTitle(title);
+        boardService.totalInsert(board);
         boardService.boardInsert3(board);
     }
 }
