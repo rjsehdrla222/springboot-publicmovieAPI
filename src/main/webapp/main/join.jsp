@@ -16,6 +16,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet"/>
 </head>
+<body>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
@@ -31,8 +32,7 @@
                        data-bs-toggle="dropdown" aria-expanded="false">순위</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">일일 순위</a></li>
-                        <li><a class="dropdown-item" href="/week">주간 순위</a></li>
-                        <li><a class="dropdown-item" href="/review">유저 순위</a></li>
+                        <li><a class="dropdown-item" href="/week1">주간 순위</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -59,84 +59,48 @@
                     </ul>
                 </li>
             </ul>
-                <button class="btn btn-outline-dark" onclick = "location.href ='/join'">
-                    회원가입
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="submit">
+                    about
                 </button>
-                &nbsp;
-                <button class="btn btn-outline-dark" onclick="location.href='/login'">
-                    로그인
-                </button>
+            </form>
         </div>
     </div>
 </nav>
-<body>
-
-<style type="text/css">
-    a:link { color: black; text-decoration: none;}
-    a:visited { color: black; text-decoration: none;}
-    a:hover { color: black; text-decoration: none;}
-</style>
-
-<div class="container" style="margin-top: 15px; text-align: center">
+<!-- Main Content -->
+<div class="container">
     <div class="row">
-        <div class="col-sm">
-        </div>
-        <div class="col-sm">
-            <c:forEach items="${firstRank}" var="firstRank">
-            <div class="col mb-5">
-                <div size="20">
-                    <div class="card h-100">
-                        <a href="/review/${firstRank.title}">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="../img/${firstRank.title}.jpg" alt="..."/>
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">${firstRank.ranks}. ${firstRank.title}</h5>
-                                    <!-- Product price-->
-                                </div>
-                            </div>
-                        </a>
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+            <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+            <form action="/join" method="post">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <input type="text" class="form-control" placeholder="ID" id="loginame" name="loginame">
+                        <p class="help-block text-danger"></p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <input type="password" class="form-control" placeholder="Password" id="pw" name="pw">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Name" id="name" name="name">
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-secondary" onclick = "location.href='history.go(-1)'">취소</button>
+                <button type="submit" class="btn btn-primary">등록</button>
+            </form>
         </div>
     </div>
 </div>
 
-</c:forEach>
-<div class="container px-3 px-lg-5 mt-5">
-    <div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
-        <c:forEach items="${list}" var="list">
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <a href="/review/${list.title}">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="../img/${list.title}.jpg" alt="..."/>
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">${list.ranks}. ${list.title}</h5>
-                            <!-- Product price-->
-                        </div>
-                    </div>
-                    </a>
-                    <!-- Product actions
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                    </div>
-                    -->
-                </div>
-            </div>
-        </c:forEach>
-    </div>
-</div>
-
-<!-- Footer-->
+<hr>
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>

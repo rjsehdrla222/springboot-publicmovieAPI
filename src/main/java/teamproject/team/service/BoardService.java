@@ -56,4 +56,9 @@ public class BoardService {
     public List<Board> totalDetail(String title) {
         return repository.totalDetail(title);
     }
+    public void rankCnt(String title) {
+        repository.rankCnt(title);
+    }
+
+    public void totalUpdateContent(Board board) { repository.totalUpdateContent(board);}
 }

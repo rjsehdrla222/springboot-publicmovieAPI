@@ -31,8 +31,7 @@
                        data-bs-toggle="dropdown" aria-expanded="false">순위</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">일일 순위</a></li>
-                        <li><a class="dropdown-item" href="/week">주간 순위</a></li>
-                        <li><a class="dropdown-item" href="/review">유저 순위</a></li>
+                        <li><a class="dropdown-item" href="/week1">주간 순위</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -59,13 +58,11 @@
                     </ul>
                 </li>
             </ul>
-                <button class="btn btn-outline-dark" onclick = "location.href ='/join'">
-                    회원가입
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="submit">
+                    about
                 </button>
-                &nbsp;
-                <button class="btn btn-outline-dark" onclick="location.href='/login'">
-                    로그인
-                </button>
+            </form>
         </div>
     </div>
 </nav>
@@ -77,65 +74,56 @@
     a:hover { color: black; text-decoration: none;}
 </style>
 
-<div class="container" style="margin-top: 15px; text-align: center">
-    <div class="row">
-        <div class="col-sm">
-        </div>
-        <div class="col-sm">
-            <c:forEach items="${firstRank}" var="firstRank">
-            <div class="col mb-5">
-                <div size="20">
-                    <div class="card h-100">
-                        <a href="/review/${firstRank.title}">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="../img/${firstRank.title}.jpg" alt="..."/>
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">${firstRank.ranks}. ${firstRank.title}</h5>
-                                    <!-- Product price-->
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-        </div>
-    </div>
-</div>
-
-</c:forEach>
-<div class="container px-3 px-lg-5 mt-5">
-    <div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+<div class="container px-4 px-lg-5 my-5">
+    <hr>
+    <form action="/login" method="get">
+        <input type="hidden" value="insert" name="insert" id="insert">
+        <button type="submit" style="float: right;">추가</button>
+    </form>
+    <table class="table">
+        <thead class="table-light">
+        <tr style="text-align: center">
+            <th scope="col"style="width: auto">순위</th>
+            <th scope="col" style="width: auto">영화 제목</th>
+            <th scope="col"style="width: auto">추천수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% int i = 1;%>
         <c:forEach items="${list}" var="list">
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <a href="/review/${list.title}">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="../img/${list.title}.jpg" alt="..."/>
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">${list.ranks}. ${list.title}</h5>
-                            <!-- Product price-->
-                        </div>
-                    </div>
-                    </a>
-                    <!-- Product actions
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                    </div>
-                    -->
-                </div>
-            </div>
+            <tr onclick="location.href='/review/${list.title}'">
+                <td style="text-align: center"><%=i%></td>
+                <td><a href="/review/${list.title}"
+                       style="color: black; backgorund-color:transparent; text-decoration:none" ;>${list.title}</a></td>
+                <td style="text-align: center">${list.ranks}</td>
+            </tr>
+            <% i++; %>
         </c:forEach>
+        </tbody>
+    </table>
+    <hr>
+    <br>
+    <div class="row text-center" style="width: 90%">
+        <div style="float:none; margin:0 auto">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <c:forEach var="i" begin="1" end="${page}">
+                    <li class="page-item"><a class="page-link" href="page=${i}">${i}</a></li>
+                </c:forEach>
+                <li class="page-item">
+                    <a class="page-link" href="page=${page}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 
+</div>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>

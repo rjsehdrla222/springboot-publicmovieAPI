@@ -27,6 +27,8 @@ public interface BoardRepository {
 
     List<Board> totalDetail(String title);
 
+    void rankCnt(String title);
+    void totalUpdateContent(Board board);
 
 
 }
