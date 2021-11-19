@@ -10,4 +10,9 @@
     <select id="login" parameterType="teamproject.team.domain.Member" resultType="teamproject.team.domain.Member">
         SELECT loginame, pw FROM member WHERE loginame = #{loginame} AND pw = #{pw};
     </select>
+
+    <select id="test" parameterType="teamproject.team.domain.Member" resultType="teamproject.team.domain.Member">
+        SELECT loginame FROM member WHERE loginame = #{loginame};
+    </select>
+
 </mapper>

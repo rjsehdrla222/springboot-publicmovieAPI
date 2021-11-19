@@ -112,6 +112,7 @@ public class HomeController {
                 else commentService.deleteComment(getId);
                 return "redirect:/review/" + encodedParam;
             } else {
+                model.addAttribute("errors", "비밀번호가 다릅니다.");
                 return "errors";
             }
         } catch (IOException e) {
@@ -121,14 +122,21 @@ public class HomeController {
     }
 
     @PostMapping("/join")
-    public String postJoin(HttpServletRequest request) {
+    public String postJoin(HttpServletRequest request, Model model) {
         Member member = new Member();
-        // 중복 아이디 검증하는 것이 필요하다.
         member.setLoginame(request.getParameter("loginame"));
         member.setName(request.getParameter("name"));
         member.setPw(request.getParameter("pw"));
-        memberService.joinUs(member);
-        return "redirect:/";
+        Member test = memberService.test(member);
+        System.out.println(test);
+        if (test == null) {
+            memberService.joinUs(member);
+            return "redirect:/";
+        }
+        else {
+            model.addAttribute("errors", "이미 같은 아이디가 존재합니다.");
+            return "errors";
+        }
     }
 
     @GetMapping("/commentUpdate")
@@ -180,7 +188,6 @@ public class HomeController {
                 member.setLoginame(name);
                 member.setPw(pw);
                 Member a = memberService.login(member);
-
                 if (a != null) {
                     Recommended recommended = new Recommended();
                     recommended.setLoginame(name);
@@ -195,7 +202,7 @@ public class HomeController {
                     }
                     return "redirect:/review/" + encodedParam;
                 } else {
-                    model.addAttribute("errors", "비밀번호가 다릅니다.");
+                    model.addAttribute("errors", "비밀번호가 다릅니다");
                     return "errors";
                 }
             }

@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <br>
-                <button type="button" class="btn btn-secondary" onclick = "location.href='history.go(-1)'">취소</button>
+                <button type="button" class="btn btn-secondary" onclick = "location.href='/'">취소</button>
                 <button type="submit" class="btn btn-primary">등록</button>
             </form>
         </div>

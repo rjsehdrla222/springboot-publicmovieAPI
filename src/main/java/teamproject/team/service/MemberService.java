@@ -19,4 +19,6 @@ public class MemberService {
         return memberRepository.login(member);
     }
 
+    public Member test(Member member) { return memberRepository.test(member); }
+
 }

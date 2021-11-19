@@ -7,4 +7,5 @@ import teamproject.team.domain.Member;
 public interface MemberRepository {
     void joinUs(Member member);
     Member login(Member member);
+    Member test(Member member);
 }
