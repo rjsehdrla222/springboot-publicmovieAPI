@@ -90,16 +90,26 @@ public class HomeController {
     }
 
     @PostMapping("/check")
-    public String check(HttpServletRequest request) {
+    public String check(HttpServletRequest request, Model model) {
         try {
             String name = request.getParameter("name");
             String title = request.getParameter("title");
+            String way = request.getParameter("way");
+            String no = request.getParameter("no");
             String encodedParam = URLEncoder.encode(title, "UTF-8");
             String catchPw = commentService.getCommentPwCheck(name);
             String tryPw = request.getParameter("pw");
             Long getId = commentService.getId(name);
             if (catchPw.equals(tryPw)) {
-                commentService.deleteComment(getId);
+                if (way.equals("update")) {
+                    model.addAttribute("name", name);
+                    model.addAttribute("title", title);
+                    model.addAttribute("no", no);
+
+                    return "/commentUpdate";
+                    //commentService.updateComment(getId, title);
+                }
+                else commentService.deleteComment(getId);
                 return "redirect:/review/" + encodedParam;
             } else {
                 return "errors";
@@ -119,6 +129,22 @@ public class HomeController {
         member.setPw(request.getParameter("pw"));
         memberService.joinUs(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/commentUpdate")
+    public String commentUpdate(HttpServletRequest request) {
+        try {
+            String title = request.getParameter("title");
+            String comment = request.getParameter("comment");
+            long id = Long.parseLong(request.getParameter("no"));
+            String encodedParam = URLEncoder.encode(title, "UTF-8");
+            commentService.updateComment(id, title, comment);
+            return "redirect:/review/" + encodedParam;
+        }
+        catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        return "/";
     }
 
     @GetMapping("/login")
@@ -161,14 +187,17 @@ public class HomeController {
                     recommended.setTitle(title);
                     Recommended check = recommendedService.findRecommended(recommended);
                     if (check != null) {
-                        System.out.println("이미 추천을 눌렀잖아?");
-                        return "/";
+                        model.addAttribute("errors", "이미 추천을 누르셨습니다.");
+                        return "/errors";
                     } else {
                         boardService.rankCnt(title);
                         recommendedService.insertRecommended(recommended);
                     }
                     return "redirect:/review/" + encodedParam;
-                } else return "errors";
+                } else {
+                    model.addAttribute("errors", "비밀번호가 다릅니다.");
+                    return "errors";
+                }
             }
         } catch (IOException e) {
             System.out.println(e.toString());
@@ -178,9 +207,15 @@ public class HomeController {
 
     @GetMapping("/check/{name}/{title}")
     public String check(@PathVariable String title,
-                        @PathVariable String name, Model model) {
+                        @PathVariable String name,
+                        Model model, HttpServletRequest request) {
+        String way = request.getParameter("way");
+        String no = request.getParameter("no");
         model.addAttribute("title", title);
         model.addAttribute("name", name);
+        model.addAttribute("way", way);
+        model.addAttribute("no", no);
+
         return "check";
     }
 
@@ -200,7 +235,6 @@ public class HomeController {
         }
         return "/";
     }
-    //@DeleteMapping("/delete")
 
     @PostMapping("/insert")
     public String insert(HttpServletRequest request) {

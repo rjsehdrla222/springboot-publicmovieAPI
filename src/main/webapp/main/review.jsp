@@ -97,7 +97,7 @@
                 </button>
             </form>
             <p><label>${list.ranks}</label></p>
-                <button type="submit" style="float: right;" onclick="location.href='/delete'">삭제</button>
+            <button type="submit" style="float: right;" onclick="location.href='/delete'">삭제</button>
             <form action="/login" method="get">
                 <input type="hidden" value="update" name="update" id="update">
                 <input type="hidden" value="${list.title}" name="title">
@@ -109,6 +109,7 @@
 <form action="/insertComment" method="post">
     <div class="container px-4 px-lg-5 my-5">
         <div style="margin-bottom: 4px;">
+            <input type="hidden" name="title" value="${list.title}">
             <input type="text" name="name" placeholder="아이디">
             <input type="password" name="pw" placeholder="비밀번호">
         </div>
@@ -120,23 +121,31 @@
     <table class="table table-striped table-hover">
         <tbody>
         <c:forEach items="${comment}" var="comment">
-            <form action="/check/${comment.name}/${comment.title}" method="get">
-                <tr>
-                    <!--onclick="location.href='/check/{comment.name}/{comment.title}-->
-                    <td style="text-align: center; width: 20%">${comment.name}</td>
-                    <td style="text-align: left">${comment.comment}
-                        <a style="float: right">
-                            <button type="submit" class="btn btn-primary">삭제</button>
-                        </a>
-                    </td>
-                </tr>
-            </form>
+            <tr>
+                <td style="text-align: center; width: 20%">${comment.name}</td>
+                <td style="text-align: left">${comment.comment}
+                    <a style="float: right">
+                        <div id="row1" style="float:left;">
+                            <form action="/check/${comment.name}/${comment.title}" method="get">
+                                <input type="hidden" name="way" value="update">
+                                <input type="hidden" name="no" value="${comment.id}">
+                                <button type="submit" class="btn btn-primary">수정</button>&nbsp;
+                            </form>
+                        </div>
+                        <div id="row2" style="float:left;">
+                            <form action="/check/${comment.name}/${comment.title}" method="get">
+                                <input type="hidden" name="way" value="delete">
+                                <button type="submit" class="btn btn-primary">삭제</button>
+                            </form>
+                        </div>
+                    </a>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>
     <br>
 </div>
-
 <br><br><br><br>
 <a href="https://www.google.com/search?q=${list.title}+영화 리뷰" target="_blank" class="button">구글 검색</a>
 </c:forEach>

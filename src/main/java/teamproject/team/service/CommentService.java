@@ -24,8 +24,8 @@ public class CommentService {
         commentRepository.insertComment(comment);
     }
 
-    public void updateComment(long id, String title) {
-        commentRepository.updateComment(id, title);
+    public void updateComment(long id, String title, String comment) {
+        commentRepository.updateComment(id, title, comment);
     }
 
     public void deleteComment(long id) {

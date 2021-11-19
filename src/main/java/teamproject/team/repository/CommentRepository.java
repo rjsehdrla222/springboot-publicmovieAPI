@@ -11,7 +11,7 @@ public interface CommentRepository {
 
     List<Comment> getCommentList(String title);
     void insertComment(Comment comment);
-    void updateComment(long id, String title);
+    void updateComment(long id, String title, String comment);
     void deleteComment(long id);
     String getCommentPwCheck(String name);
     Long getId(String name);
