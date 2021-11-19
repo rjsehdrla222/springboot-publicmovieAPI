@@ -33,7 +33,6 @@ public class ApiService {
         if (i == 1) {
             i = 0;
             b = t;
-            System.out.println("반복되면 안 돼");
             try {
                 boardService.boardDelete();
                 boardService.boardDelete2();
