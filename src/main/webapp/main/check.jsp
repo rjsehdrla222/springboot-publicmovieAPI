@@ -74,6 +74,8 @@
             <div class="col">
                 <label>작성자: ${name}</label>
                 <input type="hidden" name="name" value="${name}">
+                <input type="hidden" name="way" value="${way}">
+                <input type="hidden" name="no" value="${no}">
                 <input type="hidden" name="title" value="${title}">
             </div>
             <div class="col">
