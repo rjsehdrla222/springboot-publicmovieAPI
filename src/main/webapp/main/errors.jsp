@@ -68,7 +68,7 @@
 </nav>
 <!-- Main Content -->
 <div class="container px-4 px-lg-5 my-5">
-    <h2>비밀번호를 확인해 주세요</h2>
+    <h2>${errors}</h2>
     <button type="button" class="btn btn-secondary" onclick = "location.href='/'">뒤로가기</button>
 </div>
 
