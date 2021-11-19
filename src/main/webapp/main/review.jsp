@@ -86,6 +86,8 @@
         <div class="col-sm" style="background-color: yellow">
             <h3 style="text-align: left">${list.title}</h3>
             <h2 style="text-align: left">${list.content}</h2>
+            <h2 style="text-align: left">${list.attendance}</h2>
+            <h2 style="text-align: left">${list.upload_day}</h2>
         </div>
         <div style="background-color: white">
             <form action="/login" method="get">

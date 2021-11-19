@@ -3,20 +3,20 @@
 
 <mapper namespace="teamproject.team.repository.BoardRepository">
     <select id="getList" parameterType="teamproject.team.domain.Board" resultType="teamproject.team.domain.Board">
-        SELECT id, title, ranks
+        SELECT id, title, ranks, attendance, upload_day
         FROM movies
         WHERE ranks > 1;
     </select>
 
     <select id="getFirstRank" parameterType="teamproject.team.domain.Board" resultType="teamproject.team.domain.Board">
-        SELECT id, title, ranks
+        SELECT id, title, ranks, attendance, upload_day
         FROM movies
         WHERE ranks = 1;
     </select>
 
     <insert id="boardInsert" parameterType="teamproject.team.domain.Board">
-        INSERT INTO movies (id, title, ranks)
-        VALUES (#{id}, #{title}, #{ranks});
+        INSERT INTO movies (id, title, ranks, attendance, upload_day)
+        VALUES (#{id}, #{title}, #{ranks}, #{attendance}, #{upload_day});
     </insert>
 
     <delete id="deleteContent" parameterType="int">
@@ -25,20 +25,20 @@
     </delete>
 
     <select id="getList2" parameterType="teamproject.team.domain.Board" resultType="teamproject.team.domain.Board">
-        SELECT id, title, ranks
+        SELECT id, title, ranks, attendance, upload_day
         FROM weekmovies
         WHERE id > 1;
     </select>
 
     <select id="getFirstRank2" parameterType="teamproject.team.domain.Board" resultType="teamproject.team.domain.Board">
-        SELECT id, title, ranks
+        SELECT id, title, ranks, attendance, upload_day
         FROM weekmovies
         WHERE id = 1;
     </select>
 
     <insert id="boardInsert2" parameterType="teamproject.team.domain.Board">
-        INSERT INTO weekmovies (id, title, ranks)
-        VALUES (#{id}, #{title}, #{ranks});
+        INSERT INTO weekmovies (id, title, ranks, attendance, upload_day)
+        VALUES (#{id}, #{title}, #{ranks}, #{attendance}, #{upload_day});
     </insert>
 
     <delete id="deleteContent2" parameterType="int">
@@ -69,20 +69,20 @@
     </delete>
 
     <select id="totalList" parameterType="teamproject.team.domain.Board" resultType="teamproject.team.domain.Board">
-        SELECT id, title, ranks, content
+        SELECT id, title, ranks, content, attendance, upload_day
         FROM totalmovies
         ORDER BY ranks desc;
     </select>
 
     <select id="totalDetail" parameterType="teamproject.team.domain.Board" resultType="teamproject.team.domain.Board">
-        SELECT id, title, ranks, content
+        SELECT id, title, ranks, content, upload_day, attendance
         FROM totalmovies
         WHERE title = #{title};
     </select>
 
     <insert id="totalInsert" parameterType="teamproject.team.domain.Board">
-        INSERT IGNORE INTO totalmovies (title, ranks, content)
-        VALUES (#{title}, 0, #{content})
+        INSERT IGNORE INTO totalmovies (title, ranks, content, attendance, upload_day)
+        VALUES (#{title}, 0, #{content}, #{attendance}, #{upload_day})
     </insert>
 
     <update id="rankCnt" parameterType="String">

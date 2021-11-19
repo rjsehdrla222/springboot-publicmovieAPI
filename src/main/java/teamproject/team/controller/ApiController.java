@@ -56,13 +56,11 @@ public class ApiController {
             result.put("statusCode", resultMap.getStatusCodeValue());
             result.put("header", resultMap.getHeaders());
             result.put("body", resultMap.getBody());
-
             ObjectMapper mapper = new ObjectMapper();
             jsonInString = mapper.writeValueAsString(resultMap.getBody());
         } catch (HttpClientErrorException |
                 HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
-            System.out.println("dfdfdf");
             System.out.println(e.toString());
         } catch (
                 Exception e) {

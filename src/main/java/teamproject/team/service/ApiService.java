@@ -64,12 +64,15 @@ public class ApiService {
                                 title = title.replace(":", "：");
                             }
                             int ranks = Integer.parseInt((String) object.get("rank"));
+                            String attendance = (String) object.get("audiAcc");
+                            String openDt = (String) object.get("openDt");
+
                             int x = i + 1;
                             long ai = Long.valueOf(x);
                             if (ia == 0) {
-                                insertData(ai, title, ranks);
+                                insertData(ai, title, ranks, attendance, openDt);
                             } else {
-                                insertData2(ai, title, ranks);
+                                insertData2(ai, title, ranks, attendance, openDt);
                             }
                         }
                     } else {
@@ -97,20 +100,24 @@ public class ApiService {
         }
     }
 
-    public void insertData(long id, String title, int ranks) {
+    public void insertData(long id, String title, int ranks, String attendance, String openDt) {
         Board board = new Board();
         board.setId(id);
         board.setRanks(ranks);
         board.setTitle(title);
+        board.setAttendance(attendance);
+        board.setUpload_day(openDt);
         boardService.boardInsert(board);
         boardService.totalInsert(board);
     }
 
-    public void insertData2(long id, String title, int ranks) {
+    public void insertData2(long id, String title, int ranks, String attendance, String openDt) {
         Board board = new Board();
         board.setId(id);
         board.setRanks(ranks);
         board.setTitle(title);
+        board.setAttendance(attendance);
+        board.setUpload_day(openDt);
         boardService.totalInsert(board);
         boardService.boardInsert2(board);
     }
