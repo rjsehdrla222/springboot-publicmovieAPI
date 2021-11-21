@@ -73,12 +73,20 @@ public class HomeController {
     }
 
     @PostMapping("/insertComment")
-    public String insertComment(HttpServletRequest request) {
+    public String insertComment(HttpServletRequest request, Model model) {
         Comment comment = new Comment();
-        comment.setName(request.getParameter("name"));
-        comment.setPw(request.getParameter("pw"));
+        String name = request.getParameter("name");
+        String pw = request.getParameter("pw");
+        String catchPw = commentService.getCommentPwCheck(name, pw);
+        if (catchPw != null) {
+            model.addAttribute("errors", "아이디를 변경해주세요.");
+            return "errors";
+        }
+        comment.setName(name);
+        comment.setPw(pw);
         comment.setComment(request.getParameter("comment"));
         comment.setTitle(request.getParameter("title"));
+
         commentService.insertComment(comment);
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
@@ -96,16 +104,15 @@ public class HomeController {
             String title = request.getParameter("title");
             String way = request.getParameter("way");
             String no = request.getParameter("no");
-            String encodedParam = URLEncoder.encode(title, "UTF-8");
-            String catchPw = commentService.getCommentPwCheck(name);
             String tryPw = request.getParameter("pw");
+            String encodedParam = URLEncoder.encode(title, "UTF-8");
+            String catchPw = commentService.getCommentPwCheck(name, tryPw);
             Long getId = commentService.getId(name);
             if (catchPw.equals(tryPw)) {
                 if (way.equals("update")) {
                     model.addAttribute("name", name);
                     model.addAttribute("title", title);
                     model.addAttribute("no", no);
-
                     return "/commentUpdate";
                     //commentService.updateComment(getId, title);
                 }
@@ -222,7 +229,6 @@ public class HomeController {
         model.addAttribute("name", name);
         model.addAttribute("way", way);
         model.addAttribute("no", no);
-
         return "check";
     }
 

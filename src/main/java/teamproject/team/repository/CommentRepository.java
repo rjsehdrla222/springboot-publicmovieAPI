@@ -13,7 +13,7 @@ public interface CommentRepository {
     void insertComment(Comment comment);
     void updateComment(long id, String title, String comment);
     void deleteComment(long id);
-    String getCommentPwCheck(String name);
+    String getCommentPwCheck(String name, String pw);
     Long getId(String name);
 
 }

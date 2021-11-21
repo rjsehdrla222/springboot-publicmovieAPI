@@ -35,7 +35,7 @@ public class CommentService {
     public Long getId(String name) {
         return commentRepository.getId(name);
     }
-    public String getCommentPwCheck(String name) {
-        return commentRepository.getCommentPwCheck(name);
+    public String getCommentPwCheck(String name, String pw) {
+        return commentRepository.getCommentPwCheck(name, pw);
     }
 }

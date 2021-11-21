@@ -7,7 +7,7 @@
     </select>
 
     <select id="getCommentPwCheck" parameterType="String" resultType="String">
-        select pw from comment where name = #{name};
+        select pw from comment where name = #{name} and #{pw};
     </select>
 
     <select id="getId" parameterType="String" resultType="Long">
